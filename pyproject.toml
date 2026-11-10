@@ -1,0 +1,22 @@
+[project]
+name = "cotd-recap"
+version = "0.1.0"
+description = "Таблица кубков дня (COTD) игрока с trackmania.io в TSV/CSV"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["requests>=2.31"]
+
+[dependency-groups]
+dev = ["ruff>=0.6"]
+
+# Это скрипт, а не библиотека: uv не собирает и не ставит пакет,
+# а просто создаёт .venv с зависимостями и запускает main.py.
+[tool.uv]
+package = false
+
+[tool.ruff]
+# Код держим совместимым с Python 3.9+: аннотации из __future__,
+# timezone.utc вместо datetime.UTC.
+target-version = "py39"
+line-length = 100
+
