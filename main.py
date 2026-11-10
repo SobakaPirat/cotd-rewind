@@ -1490,6 +1490,12 @@ def build_site(args: argparse.Namespace, generated: str) -> int:
     except OSError as exc:
         LOG.error("не удалось записать общие файлы сайта: %s", exc)
         return 1
+    # Отключает Jekyll на GitHub Pages: сайт статический, обрабатывать его не нужно.
+    try:
+        with open(os.path.join(args.site, ".nojekyll"), "wb"):
+            pass
+    except OSError as exc:
+        LOG.warning("не удалось создать .nojekyll: %s", exc)
     assets_prefix = f"../{report.SITE_ASSETS_DIR}/"
     full_rows = {player.player_id: player.rows for player in prepared}
 
